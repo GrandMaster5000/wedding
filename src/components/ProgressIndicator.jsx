@@ -1,48 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useScroll } from '../contexts/ScrollContext';
 import './ProgressIndicator.css';
 
 const ProgressIndicator = ({ totalSections }) => {
-  const [currentSection, setCurrentSection] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const { currentSection, scrollProgress, scrollToSection } = useScroll();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      
-      // Вычисляем общий прогресс скролла
-      const scrollProgress = scrollTop / documentHeight;
-      setProgress(scrollProgress);
-      
-      // Определяем текущую секцию
-      const sectionHeight = window.innerHeight;
-      const current = Math.min(Math.floor(scrollTop / sectionHeight), totalSections - 1);
-      setCurrentSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Инициализация
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [totalSections]);
-
-  const scrollToSection = (index) => {
-    const sectionHeight = window.innerHeight;
-    const targetScroll = index * sectionHeight;
-    
-    window.scrollTo({
-      top: targetScroll,
-      behavior: 'smooth'
-    });
-  };
+  const progressPercentage = ((currentSection + scrollProgress) / totalSections) * 100;
 
   return (
     <div className="progress-indicator">
       <div className="progress-bar">
         <div 
           className="progress-fill" 
-          style={{ width: `${progress * 100}%` }}
+          style={{ width: `${progressPercentage}%` }}
         />
       </div>
       

@@ -1,18 +1,35 @@
 .fullscreen-section {
-  min-height: 100vh;
-  position: relative;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: all 0.6s ease-out;
-  will-change: transform;
-  opacity: 1;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s ease-out;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(100vh);
+  z-index: 1;
 }
 
-.fullscreen-section.visible {
+.fullscreen-section.active {
   opacity: 1;
   transform: translateY(0);
+  z-index: 10;
+}
+
+.fullscreen-section.scrolling {
+  transition-duration: 0.3s;
+}
+
+/* Первая секция должна быть видна по умолчанию */
+.fullscreen-section:first-child {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 10;
 }
 
 .section-content {
@@ -21,8 +38,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease-out;
-  will-change: transform;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fullscreen-section.active .section-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fullscreen-section.scrolling .section-content {
+  transition-duration: 0.3s;
 }
 
 /* Эффекты для разных секций */
@@ -60,24 +88,24 @@
 
 /* Эффекты для контента внутри секций */
 .fullscreen-section .container {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.fullscreen-section.visible .container {
+.fullscreen-section.active .container {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Эффекты для декоративных элементов */
 .fullscreen-section .decoration {
-  opacity: 0.6;
-  transform: scale(1) rotate(0deg);
+  opacity: 0;
+  transform: scale(0.8) rotate(-5deg);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.fullscreen-section.visible .decoration {
+.fullscreen-section.active .decoration {
   opacity: 0.6;
   transform: scale(1) rotate(0deg);
 }
@@ -85,60 +113,60 @@
 /* Эффекты для карточек */
 .fullscreen-section .timeline-item,
 .fullscreen-section .contact-card {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.fullscreen-section.visible .timeline-item,
-.fullscreen-section.visible .contact-card {
+.fullscreen-section.active .timeline-item,
+.fullscreen-section.active .contact-card {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Задержки для анимации карточек */
-.fullscreen-section.visible .timeline-item:nth-child(1) {
+.fullscreen-section.active .timeline-item:nth-child(1) {
   transition-delay: 0.1s;
 }
 
-.fullscreen-section.visible .timeline-item:nth-child(2) {
+.fullscreen-section.active .timeline-item:nth-child(2) {
   transition-delay: 0.2s;
 }
 
-.fullscreen-section.visible .timeline-item:nth-child(3) {
+.fullscreen-section.active .timeline-item:nth-child(3) {
   transition-delay: 0.3s;
 }
 
-.fullscreen-section.visible .contact-card:nth-child(1) {
+.fullscreen-section.active .contact-card:nth-child(1) {
   transition-delay: 0.1s;
 }
 
-.fullscreen-section.visible .contact-card:nth-child(2) {
+.fullscreen-section.active .contact-card:nth-child(2) {
   transition-delay: 0.2s;
 }
 
 /* Эффекты для кнопок */
 .fullscreen-section .route-button button,
 .fullscreen-section .submit-btn {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.fullscreen-section.visible .route-button button,
-.fullscreen-section.visible .submit-btn {
+.fullscreen-section.active .route-button button,
+.fullscreen-section.active .submit-btn {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
 /* Эффекты для форм */
 .fullscreen-section .form {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 0;
+  transform: translateY(20px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.fullscreen-section.visible .form {
+.fullscreen-section.active .form {
   opacity: 1;
   transform: translateY(0);
 }
@@ -159,7 +187,7 @@
   opacity: 0;
 }
 
-.fullscreen-section.visible::before {
+.fullscreen-section.active::before {
   transform: scaleX(1);
   opacity: 1;
 }
@@ -167,23 +195,22 @@
 /* Адаптивность */
 @media (max-width: 768px) {
   .fullscreen-section {
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
     padding: 20px;
   }
   
   .section-content {
-    transform: none;
-  }
-  
-  .fullscreen-section.visible {
-    position: relative;
-    height: 100vh;
-    min-height: 100vh;
+    padding: 20px;
   }
 }
 
 @media (max-width: 480px) {
   .fullscreen-section {
+    padding: 15px;
+  }
+  
+  .section-content {
     padding: 15px;
   }
   
@@ -203,8 +230,20 @@
   .fullscreen-section .route-button button,
   .fullscreen-section .submit-btn,
   .fullscreen-section .form {
-    transition: none;
-    opacity: 1;
-    transform: none;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  .fullscreen-section.active .section-content,
+  .fullscreen-section.active .container,
+  .fullscreen-section.active .decoration,
+  .fullscreen-section.active .timeline-item,
+  .fullscreen-section.active .contact-card,
+  .fullscreen-section.active .route-button button,
+  .fullscreen-section.active .submit-btn,
+  .fullscreen-section.active .form {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

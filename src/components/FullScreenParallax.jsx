@@ -1,35 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useScroll } from '../contexts/ScrollContext';
 import './FullScreenParallax.css';
 
 const FullScreenParallax = ({ children, index, totalSections }) => {
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const { currentSection, scrollProgress, isScrolling } = useScroll();
+  const [isActive, setIsActive] = useState(index === 0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (sectionRef.current) {
-        const rect = sectionRef.current.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        // Определяем, видна ли секция в viewport
-        const isInView = rect.top < windowHeight && rect.bottom > 0;
-        setIsVisible(isInView);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Вызываем сразу для инициализации
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const isCurrentSection = currentSection === index;
+    setIsActive(isCurrentSection);
+  }, [currentSection, index]);
 
   return (
     <div 
       ref={sectionRef}
-      className={`fullscreen-section ${isVisible ? 'visible' : ''}`}
+      className={`fullscreen-section ${isActive ? 'active' : ''} ${isScrolling ? 'scrolling' : ''}`}
       style={{
         '--section-index': index,
-        '--total-sections': totalSections
+        '--total-sections': totalSections,
+        '--scroll-progress': scrollProgress,
+        '--is-active': isActive ? 1 : 0
       }}
     >
       <div className="section-content">
