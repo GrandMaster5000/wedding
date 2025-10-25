@@ -1,0 +1,124 @@
+.location {
+  padding: 80px 20px;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.location-decoration {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  opacity: 0.1;
+}
+
+.location-decoration img {
+  width: 80px;
+  height: auto;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.location h2 {
+  font-size: 32px;
+  color: #2c2c2c;
+  margin-bottom: 50px;
+  font-weight: 300;
+  text-transform: lowercase;
+  font-family: 'Playfair Display', serif;
+}
+
+.location-info {
+  margin-bottom: 50px;
+}
+
+.address {
+  font-size: 18px;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.address strong {
+  color: #2c2c2c;
+  font-weight: 600;
+}
+
+.venue {
+  font-size: 16px;
+  color: #8b8b8b;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 300;
+}
+
+.route-button {
+  margin-top: 30px;
+}
+
+.route-button button {
+  background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 14px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-family: inherit;
+}
+
+.route-button button:hover {
+  background-color: #b8941f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+@media (max-width: 768px) {
+  .location {
+    padding: 60px 15px;
+  }
+  
+  .location h2 {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  
+  .address {
+    font-size: 16px;
+  }
+  
+  .venue {
+    font-size: 14px;
+  }
+  
+  .route-button button {
+    padding: 12px 25px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .location h2 {
+    font-size: 24px;
+  }
+  
+  .address {
+    font-size: 15px;
+  }
+  
+  .venue {
+    font-size: 13px;
+  }
+}

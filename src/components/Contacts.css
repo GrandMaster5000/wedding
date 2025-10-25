@@ -1,0 +1,169 @@
+.contacts {
+  padding: 80px 20px;
+  background-color: #f8f6f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.contacts-decoration {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1;
+  opacity: 0.1;
+}
+
+.contacts-decoration img {
+  width: 80px;
+  height: auto;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.contacts h2 {
+  font-size: 32px;
+  color: #2c2c2c;
+  margin-bottom: 30px;
+  font-weight: 300;
+  text-transform: lowercase;
+  font-family: 'Playfair Display', serif;
+}
+
+.contacts-content {
+  margin-bottom: 50px;
+}
+
+.contacts-content p {
+  font-size: 16px;
+  color: #8b8b8b;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.contact-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.contact-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  min-width: 200px;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card h3 {
+  font-size: 18px;
+  color: #2c2c2c;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-family: 'Playfair Display', serif;
+}
+
+.contact-card a {
+  font-size: 16px;
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.contact-card a:hover {
+  color: #b8941f;
+}
+
+.footer-message {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 30px;
+}
+
+.footer-message h3 {
+  font-size: 20px;
+  color: #2c2c2c;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-family: 'Playfair Display', serif;
+}
+
+.footer-message p {
+  font-size: 16px;
+  color: #8b8b8b;
+  margin: 0;
+  font-style: italic;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .contacts {
+    padding: 60px 15px;
+  }
+  
+  .contacts h2 {
+    font-size: 28px;
+  }
+  
+  .contact-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .contact-card {
+    min-width: 250px;
+    padding: 25px;
+  }
+  
+  .contacts-content p {
+    font-size: 15px;
+  }
+  
+  .footer-message h3 {
+    font-size: 18px;
+  }
+  
+  .footer-message p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contacts h2 {
+    font-size: 24px;
+  }
+  
+  .contact-card {
+    min-width: 200px;
+    padding: 20px;
+  }
+  
+  .contact-card h3 {
+    font-size: 16px;
+  }
+  
+  .contact-card a {
+    font-size: 15px;
+  }
+  
+  .footer-message h3 {
+    font-size: 16px;
+  }
+  
+  .footer-message p {
+    font-size: 14px;
+  }
+}
