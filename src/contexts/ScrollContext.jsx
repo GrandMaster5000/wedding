@@ -21,6 +21,13 @@ export const ScrollProvider = ({ children, totalSections = 7 }) => {
     currentSectionRef.current = currentSection;
   }, [currentSection]);
 
+  // Сбрасываем текущую секцию если она выходит за пределы totalSections
+  useEffect(() => {
+    if (currentSection >= totalSections) {
+      setCurrentSection(totalSections - 1);
+    }
+  }, [totalSections, currentSection]);
+
   useEffect(() => {
     let touchStartY = 0;
     let touchEndY = 0;

@@ -24,10 +24,10 @@ function MainContent() {
   let currentIndex = 0;
   const heroIndex = currentIndex++;
   const personalInvitationIndex = hasPersonalInvitation ? currentIndex++ : -1;
-  const photoGalleryIndex = currentIndex++;
   const locationIndex = currentIndex++;
   const timingIndex = currentIndex++;
   const wishlistIndex = currentIndex++;
+  const photoGalleryIndex = currentIndex++;
   const contactsIndex = currentIndex++;
   
   return (
@@ -46,10 +46,6 @@ function MainContent() {
         </FullScreenParallax>
       )}
       
-      <FullScreenParallax index={photoGalleryIndex} totalSections={totalSections}>
-        <PhotoGallery />
-      </FullScreenParallax>
-
       <FullScreenParallax index={locationIndex} totalSections={totalSections}>
         <Location />
       </FullScreenParallax>
@@ -69,6 +65,10 @@ function MainContent() {
       {/* <FullScreenParallax index={rsvpFormIndex} totalSections={totalSections}>
         <RSVPForm />
       </FullScreenParallax> */}
+
+       <FullScreenParallax index={photoGalleryIndex} totalSections={totalSections}>
+        <PhotoGallery />
+      </FullScreenParallax>
       
       <FullScreenParallax index={contactsIndex} totalSections={totalSections}>
         <Contacts />
@@ -77,16 +77,27 @@ function MainContent() {
   );
 }
 
+function AppContent() {
+  const location = useLocation();
+  const path = location.pathname.slice(1);
+  const hasPersonalInvitation = path && path.length > 0;
+  const totalSections = hasPersonalInvitation ? 7 : 6;
+  
+  return (
+    <ScrollProvider totalSections={totalSections}>
+      <div className="app">
+        <MainContent />
+      </div>
+    </ScrollProvider>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <ScrollProvider totalSections={9}>
-        <div className="app">
-          <Routes>
-            <Route path="/*" element={<MainContent />} />
-          </Routes>
-        </div>
-      </ScrollProvider>
+      <Routes>
+        <Route path="/*" element={<AppContent />} />
+      </Routes>
     </Router>
   );
 }
