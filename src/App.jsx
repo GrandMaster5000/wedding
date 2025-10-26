@@ -1,65 +1,89 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ScrollProvider } from './contexts/ScrollContext';
 import Hero from './components/Hero';
+import PersonalInvitation from './components/PersonalInvitation';
 import Location from './components/Location';
 import PhotoGallery from './components/PhotoGallery';
 import Timing from './components/Timing';
 import Wishlist from './components/Wishlist';
-import DressCode from './components/DressCode';
-import RSVPForm from './components/RSVPForm';
 import Contacts from './components/Contacts';
 import FullScreenParallax from './components/FullScreenParallax';
 import ProgressIndicator from './components/ProgressIndicator';
 import ScrollHint from './components/ScrollHint';
-import DebugControls from './components/DebugControls';
 import './App.css';
+
+function MainContent() {
+  const location = useLocation();
+  const path = location.pathname.slice(1);
+  const hasPersonalInvitation = path && path.length > 0;
+  
+  const totalSections = hasPersonalInvitation ? 7 : 6;
+  
+  // Определяем индексы секций
+  let currentIndex = 0;
+  const heroIndex = currentIndex++;
+  const personalInvitationIndex = hasPersonalInvitation ? currentIndex++ : -1;
+  const photoGalleryIndex = currentIndex++;
+  const locationIndex = currentIndex++;
+  const timingIndex = currentIndex++;
+  const wishlistIndex = currentIndex++;
+  const contactsIndex = currentIndex++;
+  
+  return (
+    <>
+      {/* <DebugControls /> */}
+      <ProgressIndicator totalSections={totalSections} />
+      <ScrollHint />
+      
+      <FullScreenParallax index={heroIndex} totalSections={totalSections}>
+        <Hero />
+      </FullScreenParallax>
+      
+      {hasPersonalInvitation && personalInvitationIndex !== -1 && (
+        <FullScreenParallax index={personalInvitationIndex} totalSections={totalSections}>
+          <PersonalInvitation />
+        </FullScreenParallax>
+      )}
+      
+      <FullScreenParallax index={photoGalleryIndex} totalSections={totalSections}>
+        <PhotoGallery />
+      </FullScreenParallax>
+
+      <FullScreenParallax index={locationIndex} totalSections={totalSections}>
+        <Location />
+      </FullScreenParallax>
+      
+      <FullScreenParallax index={timingIndex} totalSections={totalSections}>
+        <Timing />
+      </FullScreenParallax>
+      
+      <FullScreenParallax index={wishlistIndex} totalSections={totalSections}>
+        <Wishlist />
+      </FullScreenParallax>
+      
+      {/* <FullScreenParallax index={dressCodeIndex} totalSections={totalSections}>
+        <DressCode />
+      </FullScreenParallax> */}
+      
+      {/* <FullScreenParallax index={rsvpFormIndex} totalSections={totalSections}>
+        <RSVPForm />
+      </FullScreenParallax> */}
+      
+      <FullScreenParallax index={contactsIndex} totalSections={totalSections}>
+        <Contacts />
+      </FullScreenParallax>
+    </>
+  );
+}
 
 function App() {
   return (
     <Router>
-      <ScrollProvider totalSections={8}>
+      <ScrollProvider totalSections={9}>
         <div className="app">
           <Routes>
-            <Route path="/" element={
-              <>
-                {/* <DebugControls /> */}
-                <ProgressIndicator totalSections={8} />
-                <ScrollHint />
-                
-                <FullScreenParallax index={0} totalSections={8}>
-                  <Hero />
-                </FullScreenParallax>
-                
-                <FullScreenParallax index={1} totalSections={8}>
-                  <PhotoGallery />
-                </FullScreenParallax>
-
-                 <FullScreenParallax index={2} totalSections={8}>
-                  <Location />
-                </FullScreenParallax>
-                
-                <FullScreenParallax index={3} totalSections={8}>
-                  <Timing />
-                </FullScreenParallax>
-                
-                <FullScreenParallax index={4} totalSections={8}>
-                  <Wishlist />
-                </FullScreenParallax>
-                
-                <FullScreenParallax index={5} totalSections={8}>
-                  <DressCode />
-                </FullScreenParallax>
-                
-                <FullScreenParallax index={6} totalSections={8}>
-                  <RSVPForm />
-                </FullScreenParallax>
-                
-                <FullScreenParallax index={7} totalSections={8}>
-                  <Contacts />
-                </FullScreenParallax>
-              </>
-            } />
+            <Route path="/*" element={<MainContent />} />
           </Routes>
         </div>
       </ScrollProvider>
