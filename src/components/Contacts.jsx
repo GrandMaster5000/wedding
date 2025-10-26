@@ -14,19 +14,19 @@ const Contacts = () => {
           
           <div className="contact-cards">
             <div className="contact-card">
-              <h3>Илья</h3>
-              <a href="tel:+79990000000">+7 999 000 00 00</a>
+              <h3>Анатолий</h3>
+              <a href="tel:+79990000000">+7 999 632 14 74</a>
             </div>
             <div className="contact-card">
-              <h3>Полина</h3>
-              <a href="tel:+79680000000">+7 968 000 00 00</a>
+              <h3>Алина</h3>
+              <a href="tel:+79680000000">+7 900 983 69 63</a>
             </div>
           </div>
         </div>
         
         <div className="footer-message">
           <h3>Ждём встречи</h3>
-          <p>С любовью, илья и полина</p>
+          <p>С любовью, Анатолий и Алина</p>
         </div>
       </div>
     </section>

@@ -18,12 +18,12 @@ const Hero = () => {
       </div>
       <div className="hero-content">
         <div className="names">
-          <h1 className="name">Илья</h1>
+          <h1 className="name">Анатолий</h1>
           <div className="save-date">
             <p>save the date</p>
-            <h2>25.09.25</h2>
+            <h2>29.11.25</h2>
           </div>
-          <h1 className="name">Полина</h1>
+          <h1 className="name">Алина</h1>
         </div>
         <div className="ampersand">&</div>
         <div className="invitation-text">
