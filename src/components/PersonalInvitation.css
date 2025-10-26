@@ -67,11 +67,10 @@
 
 .decoration-candelabra {
   display: none;
-  bottom: 5%;
-  right: 5%;
+  bottom: 9%;
   animation: float 9s ease-in-out infinite;
   opacity: 0.4;
-  left: 143px;
+  left: 84px;
 }
 
 .decoration-candelabra img {
