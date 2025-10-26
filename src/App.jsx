@@ -95,7 +95,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/wedding">
       <Routes>
         <Route path="/*" element={<AppContent />} />
       </Routes>
