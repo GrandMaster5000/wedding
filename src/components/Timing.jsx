@@ -13,18 +13,21 @@ const Timing = () => {
       <div className="container">
         <h2>ТАЙМИНГ</h2>
         <div className="timeline">
+         <div className="timeline-item">
+            <div className="time">14:45</div>
+            <div className="event">СБОР ГОСТЕЙ В ЗАГСЕ</div>
+          </div>
+          <div className="timeline-divider timeline-divider-2"></div>
           <div className="timeline-item">
             <div className="time">15:00</div>
-            <div className="event">СБОР ГОСТЕЙ</div>
-          </div>
-          <div className="timeline-item">
-            <div className="time">15:45</div>
             <div className="event">СВАДЕБНАЯ ЦЕРЕМОНИЯ</div>
           </div>
+          <div className="timeline-divider timeline-divider-3"></div>
           <div className="timeline-item">
             <div className="time">16:30</div>
-            <div className="event">Ужин, вино и танцы</div>
+            <div className="event">РЕСТОРАН, КОНЬЯК И ТАНЦЫ</div>
           </div>
+          <div className="timeline-divider timeline-divider-1"></div>
         </div>
       </div>
     </section>

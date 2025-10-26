@@ -24,8 +24,8 @@ function MainContent() {
   let currentIndex = 0;
   const heroIndex = currentIndex++;
   const personalInvitationIndex = hasPersonalInvitation ? currentIndex++ : -1;
-  const locationIndex = currentIndex++;
   const timingIndex = currentIndex++;
+  const locationIndex = currentIndex++;
   const wishlistIndex = currentIndex++;
   const photoGalleryIndex = currentIndex++;
   const contactsIndex = currentIndex++;
@@ -46,13 +46,14 @@ function MainContent() {
         </FullScreenParallax>
       )}
       
+      <FullScreenParallax index={timingIndex} totalSections={totalSections}>
+        <Timing />
+      </FullScreenParallax>
+
       <FullScreenParallax index={locationIndex} totalSections={totalSections}>
         <Location />
       </FullScreenParallax>
       
-      <FullScreenParallax index={timingIndex} totalSections={totalSections}>
-        <Timing />
-      </FullScreenParallax>
       
       <FullScreenParallax index={wishlistIndex} totalSections={totalSections}>
         <Wishlist />

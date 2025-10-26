@@ -57,6 +57,33 @@
   margin: 0 auto;
 }
 
+.timeline-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  min-height: 150px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.timeline-divider-1 {
+  background-image: url('/images/image123456.png');
+  background-size: 119%;
+  background-position: 47.175% 40.413%;
+}
+
+.timeline-divider-2 {
+  background-image: url('/images/snapedit_17168000987.png');
+  background-size: 85%;
+}
+
+.timeline-divider-3 {
+  background-image: url('/images/snapedit_17168002229 (1).png');
+  background-size: 86%
+}
+
 .timeline-item {
   display: flex;
   align-items: center;
@@ -118,6 +145,10 @@
     text-align: center;
     font-size: 15px;
   }
+  
+  .timeline-divider {
+    min-height: 120px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -135,5 +166,13 @@
   
   .event {
     font-size: 14px;
+  }
+  
+  .timeline-divider {
+    min-height: 100px;
+  }
+
+  .timeline-divider-1 {
+    background-size: 137%
   }
 }

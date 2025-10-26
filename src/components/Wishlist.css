@@ -35,7 +35,7 @@
 }
 
 .wishlist-decoration img {
-  width: 70px;
+  width: 115px;
   height: auto;
 }
 
@@ -124,7 +124,6 @@
   }
   
   .wishlist-decoration-bow img {
-    width: 100vw;
-    max-width: 100vw;
+    width: 80px;
   }
 }

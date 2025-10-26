@@ -135,6 +135,10 @@
 }
 
 .invitation-text p {
+  font-style: italic;
+}
+
+.invitation-text p {
   font-size: 16px;
   color: #666;
   line-height: 1.8;

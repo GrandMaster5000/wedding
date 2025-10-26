@@ -16,10 +16,16 @@ const Contacts = () => {
             <div className="contact-card">
               <h3>Анатолий</h3>
               <a href="tel:+79990000000">+7 999 632 14 74</a>
+              <a href="https://t.me/GrandMaster5000" className="telegram-link" target="_blank" rel="noopener noreferrer">
+                Telegram
+              </a>
             </div>
             <div className="contact-card">
               <h3>Алина</h3>
               <a href="tel:+79680000000">+7 900 983 69 63</a>
+              <a href="https://t.me/dolcecyati" className="telegram-link" target="_blank" rel="noopener noreferrer">
+                Telegram
+              </a>
             </div>
           </div>
         </div>

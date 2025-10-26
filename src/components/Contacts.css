@@ -80,15 +80,26 @@
 }
 
 .contact-card a {
+  display: block;
   font-size: 16px;
   color: #d4af37;
   text-decoration: none;
   font-weight: 400;
   transition: color 0.3s ease;
+  margin-bottom: 10px;
 }
 
 .contact-card a:hover {
   color: #b8941f;
+}
+
+.contact-card a:last-child {
+  margin-bottom: 0;
+}
+
+.telegram-link {
+  font-size: 14px;
+  color: #8b8b8b;
 }
 
 .footer-message {
