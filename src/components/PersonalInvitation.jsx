@@ -4,7 +4,14 @@ import './PersonalInvitation.css';
 
 const PersonalInvitation = () => {
   const location = useLocation();
-  const path = location.pathname.slice(1); // убираем первый /
+  let path = location.pathname.slice(1); // убираем первый /
+  
+  // Декодируем URL-кодирование
+  try {
+    path = decodeURIComponent(path);
+  } catch (e) {
+    // Если декодирование не удалось, используем как есть
+  }
 
   if (!path) {
     return null; // нет персонализации
@@ -18,8 +25,8 @@ const PersonalInvitation = () => {
   const coupleMatch = path.match(/^(.+)\+(.+)$/);
   if (coupleMatch) {
     invitationType = 'couple';
-    const name1 = decodeURIComponent(coupleMatch[1]);
-    const name2 = decodeURIComponent(coupleMatch[2]);
+    const name1 = coupleMatch[1];
+    const name2 = coupleMatch[2];
     guestName = `${capitalizeFirst(name1)} и ${capitalizeFirst(name2)}`;
   } 
   // Проверка на семью (формат: семья-фамилия)
@@ -31,12 +38,40 @@ const PersonalInvitation = () => {
   // Одиночное приглашение
   else {
     invitationType = 'single';
-    guestName = capitalizeFirst(decodeURIComponent(path));
+    guestName = capitalizeFirst(path);
   }
 
   function capitalizeFirst(str) {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
+
+  // Список женских имен (для случаев когда окончание неопределенно)
+  const femaleNames = [
+    'анна', 'мария', 'елена', 'наталья', 'ольга', 'татьяна', 'ирина', 'екатерина',
+    'светлана', 'юлия', 'анастасия', 'дарья', 'алина', 'марина', 'надежда',
+    'валентина', 'людмила', 'галина', 'елизавета', 'вероника', 'полина', 'виктория',
+    'александра', 'любовь', 'алла', 'лариса', 'тамара', 'раиса', 'генриетта',
+    'анита', 'валерия', 'кристина', 'диана', 'яна', 'карина', 'милана', 'милена', "евгения"
+  ];
+
+  function isFemaleName(name) {
+    const nameLower = name.toLowerCase();
+    // Проверяем по списку женских имен
+    if (femaleNames.includes(nameLower)) {
+      return true;
+    }
+    // Проверяем окончание - большинство женских имен заканчиваются на 'а' или 'я'
+    // Исключения - мужские имена типа Ваня, Дима, Никита, Данила (но они обычно пишутся Никита, Даниил)
+    const lastChar = nameLower.slice(-1);
+    if (lastChar === 'а' || lastChar === 'я') {
+      // Исключения - мужские имена
+      const maleExceptions = ['ваня', 'дима', 'коля', 'вася'];
+      if (!maleExceptions.includes(nameLower)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   const getGreeting = () => {
@@ -46,9 +81,32 @@ const PersonalInvitation = () => {
       case 'family':
         return `Дорогие ${guestName}!`;
       case 'single':
-        return `Дорогой ${guestName}!`;
+        const isFemale = isFemaleName(guestName);
+        return isFemale ? `Дорогая ${guestName}!` : `Дорогой ${guestName}!`;
       default:
         return `Дорогой ${guestName}!`;
+    }
+  };
+
+  const getMessage = () => {
+    if (invitationType === 'single') {
+      return (
+        <>
+          Мы очень хотим разделить с тобой этот особенный день нашей любви.
+          {' '}
+          <br />
+          Твоё присутствие сделает наше торжество еще более незабываемым!
+        </>
+      );
+    } else {
+      return (
+        <>
+          Мы очень хотим разделить с вами этот особенный день нашей любви.
+          {' '}
+          <br />
+          Ваше присутствие сделает наше торжество еще более незабываемым!
+        </>
+      );
     }
   };
 
@@ -78,8 +136,7 @@ const PersonalInvitation = () => {
             {getGreeting()}
           </h2>
           <p className="invitation-message">
-            Мы очень хотим разделить с вами этот особенный день нашей любви.
-            Ваше присутствие сделает наше торжество еще более незабываемым!
+            {getMessage()}
           </p>
         </div>
       </div>
